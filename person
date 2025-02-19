@@ -1,0 +1,47 @@
+package Person;
+
+import java.util.Scanner;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+public class Person {
+    private String id;
+    private String hometown;
+    private Date dateOfBirth;
+    public Person(String id, String hometown, Date dateOfBirth){
+        this.id = id;
+        this.hometown = hometown;
+        this.dateOfBirth = dateOfBirth;
+    }
+    public String getId(){
+        return id;
+    }
+    public String getHometown(){
+        return hometown;
+    }
+    public Date getDateofbirth(){
+        return dateOfBirth;
+    }
+    public void displayInfo(){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        System.out.println("Id: "+id);
+        System.out.println("Hometown: "+hometown);
+        System.out.println("Date Of Birth: "+sdf.format(dateOfBirth));
+}
+    public void addPerson(String id, String hometown, Date dateOfBirth){
+        this.id = id;
+        this.hometown = hometown;
+        this.dateOfBirth = dateOfBirth;
+    }
+    public boolean editPerson(String newId, String newHometown, Date newDateOfBirth){
+        this.id = newId;
+        this.hometown = newHometown;
+        this.dateOfBirth = newDateOfBirth;
+        return true;
+    }
+    public static void main(String[] args) {
+    Person p = new Person("H101164", "DaNang", new Date());
+    p.displayInfo();
+}
+       
+    }
+    
