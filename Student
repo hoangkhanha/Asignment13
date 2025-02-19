@@ -1,0 +1,42 @@
+package Person;
+
+import java.util.Scanner;
+import java.util.Date;
+
+public class Student extends Person {
+
+    private String major;
+
+    public Student(String id, String hometown, Date dateOfBirth, String major) {
+        super(id, hometown, dateOfBirth);
+        this.major = major;
+    }
+
+    public String getMajor() {
+        return major;
+    }
+
+    public void displayInfo() {
+        System.out.println("Type:Student");
+        super.displayInfo();
+        System.out.println("Major:" + major);
+    }
+
+    public void addPerson() {
+        System.out.println("Them nguoi co id :" + super.getId());
+    }
+
+    public boolean editPerson(String hometown, Date dateOfBirth, String major) {
+        super.editPerson(hometown, dateOfBirth);
+        this.major = major;
+        return true;
+    }
+    public static void main(String[] args) {
+    Person p = new Person("H101164", "DaNang", new Date());
+    p.displayInfo();
+}
+    
+
+    
+    }
+
