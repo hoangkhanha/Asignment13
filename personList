@@ -1,0 +1,61 @@
+package Person;
+
+import java.util.ArrayList;
+import java.util.Date;
+
+public class Personlist {
+
+    private ArrayList<Person> people;
+
+    public Personlist() {
+        this.people = new ArrayList<>();
+    }
+
+    public void addPerson(Person person) {
+        people.add(person);
+        System.out.println("Person add: " + person.getId());
+
+    }
+
+    public void displayAll() {
+        for (Person person : people) {
+            person.displayInfo();
+        }
+    }
+
+    public Person findPersonById(String id) {
+        for (Person person : people) {
+            if (person.getId().equals(id)) {
+                return person;
+            }
+        }
+        return null;
+    }
+
+    public boolean deletePersonById(String id) {
+        Person personToRemove = findPersonById(id);
+        if (personToRemove != null) {
+            people.remove(personToRemove);
+            System.out.println("Person remove: " + id);
+            return true;
+        }
+        System.out.println("Person with id" + id + "not found.");
+        return false;
+    }
+
+    public boolean editPersonById(String id, String hometown, Date dateOfBirth) {
+        Person personToEdit = findPersonById(id);
+        if (personToEdit instanceof Student) {
+            ((Student) personToEdit).editPerson(hometown, dateOfBirth, ((Student) personToEdit).getMajor());
+        } else if (personToEdit instanceof Teacher) {
+            ((Teacher) personToEdit).editPerson(hometown, dateOfBirth, ((Teacher) personToEdit).getDepartment());
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        Person p = new Person("H101164", "DaNang", new Date());
+        p.displayInfo();
+    }
+
+}
