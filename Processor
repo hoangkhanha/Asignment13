@@ -1,0 +1,85 @@
+package Person;
+
+import java.util.Scanner;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class Processor {
+
+    public static void main(String[] args) {
+        Scanner nhap = new Scanner(System.in);
+        PersonList personList = new PersonList();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        while (true) {
+            System.out.println("------------------------");
+            System.out.println("0. them nguoi");
+            System.out.println("1.Delete person by id");
+            System.out.println("2Edit person");
+            System.out.println("3.display all");
+            System.out.println("4. exit");
+            System.out.println("Choice :");
+            int choice = nhap.nextInt();
+            nhap.nextLine();
+            switch (choice) {
+                case 0:
+                    String type;
+                    while (true) {
+                        System.out.println("Nhap type(teacher/student");
+                        type = nhap.nextLine();
+                        if (type.equalsIgnoreCase("student") || type.equalsIgnoreCase("teacher")) {
+                            System.out.println("Nhap hop li");
+                            break;
+                        }
+                        System.out.println("nhap khong hop le!!! NHAP LAI!!!");
+                    }
+
+                    System.out.println("Nhap id :");
+                    String id = nhap.nextLine();
+                    System.out.println("Nhap que :");
+                    String hometown = nhap.nextLine();
+                    Date dateOfBirth = null;
+                    while (dateOfBirth == null) {
+                        try {
+                            System.out.println("Nhap ngay thang theo dinh dang (dd/MM/yyyy");
+                            String input = nhap.nextLine();
+                            dateOfBirth = sdf.parse(input);
+                        } catch (Exception e) {
+                            System.out.println("Khong hop le!!!");
+                        }
+                    }
+                    if (type.equalsIgnoreCase("student")) {
+                        System.out.println("Nhap chuyen nganh:");
+                        String major = nhap.nextLine();
+                        Student student = new Student(id, hometown, dateOfBirth, major);
+                        personlist.addPerson(student);
+                    } else {
+                        System.out.println("Nhap khoa:");
+                        String department = nhap.nextLine();
+                        Teacher teacher = new Teacher(id, hometown, dateOfBirth, department);
+                        personlist.addPerson(teacher);
+                    }
+                    break;
+
+                case 1:
+                    System.out.println("Nhap id muon xoa :");
+                    personlist.deletePersonById(nhap.nextLine());
+
+                    break;
+                case 2:
+                    System.out.println("Nhap id muom edit :");
+                    personlist.editPersonById(nhap.nextLine());
+                    break;
+                case 3:
+                    System.out.println("-----Thong tin-------");
+                    personlist.displayAll();
+                case 4:
+                    System.out.println("Exit");
+
+                    break;
+                default:
+                    System.out.println("Nhap khong hop le!!!");
+            }
+        }
+    }
+}
